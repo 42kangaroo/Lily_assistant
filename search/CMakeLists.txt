@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.13)
+project(search)
+
+set(CMAKE_CXX_STANDARD 20)
+set(Headers /home/pi/C-Programmes/)
+set(QT_INCLUDE_PATH /usr/include/arm-linux-gnueabihf/qt5)
+find_package(CURL REQUIRED)
+find_package(Qt5Sql REQUIRED)
+find_package(Qt5Core REQUIRED)
+set(Dependencies ${Headers}/functions/LilyStdFuncsString.cpp ${Headers}/functions/LilyStdFuncsString.hpp ${Headers}/functions/LilyStdFuncs.cpp ${Headers}/functions/LilyStdFuncs.hpp ${Headers}/listen/Dictionary_txt.hpp ${Headers}/listen/Dictionary_txt.cpp ${Headers}/addGUI/Database_handler.cpp ${Headers}/addGUI/Database_handler.hpp)
+add_executable(search main.cpp questInterface.cpp questInterface.hpp NormalQuestion.cpp NormalQuestion.hpp questFuncString.cpp questFuncString.hpp listQuest.cpp listQuest.hpp questFunc.cpp questFunc.hpp ${Dependencies} questType.hpp)
+target_link_libraries(search PUBLIC ${CURL_LIBRARIES} jsoncpp pocketsphinx sphinxbase sphinxad asound Qt5Sql Qt5Core)
+target_include_directories(search PUBLIC ${Headers} ${QT_INCLUDE_PATH} ${QT_INCLUDE_PATH}/QtSql ${QT_INCLUDE_PATH}/QtCore)
