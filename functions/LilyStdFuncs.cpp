@@ -20,7 +20,7 @@ namespace Lily::functions {
         std::string getWeather() {
             std::string openWeatherMapToken = "";
             const std::string url(
-                    "http://api.openweathermap.org/data/2.5/weather?q=Riehen,ch&appid=" + oponWeatherMapToken +
+                    "http://api.openweathermap.org/data/2.5/weather?q=Riehen,ch&appid=" + openWeatherMapToken +
                     "&units=metric");
 
             CURL *curl = curl_easy_init();
@@ -106,7 +106,8 @@ namespace Lily::functions {
         std::string getTime() {
             time_t now = time(0);
             tm *ltm = localtime(&now);
-            std::string times = std::to_string(ltm->tm_hour) + ":" + std::to_string(ltm->tm_min);
+            std::string zeroIfToSmall = (ltm->tm_min < 10) ? "0" : "";
+            std::string times = std::to_string(ltm->tm_hour) + ":" + zeroIfToSmall + std::to_string(ltm->tm_min);
             return "The time is " + times;
         }
     }
